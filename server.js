@@ -45,7 +45,7 @@ if (isDeveloping) {
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
 
-
+//On écoute sur le port 8080 par défaut
 app.listen(port, function onStat(err){
   if (err) {
     console.log(err);

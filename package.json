@@ -1,18 +1,17 @@
 {
-  "name": "Assaucisson",
-  "version": "2.0.0",
-  "description": "Gérer les adhérents de votre association",
+  "name": "WPT",
+  "version": "1.0.0",
+  "description": "What Peaople Think",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/robelsh/gda/"
+    "url": "https://github.com/robelsh/wpt/"
   },
   "keywords": [
-    "assaucisson",
-    "gda",
-    "gestion des adhérents d'une association"
+    "wpt",
+    "LOL"
   ],
-  "author": "Etienne Jezequel et Mathieu Gauthier",
+  "author": "Etienne Jezequel",
   "dependencies": {
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",

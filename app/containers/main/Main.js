@@ -1,7 +1,7 @@
 
 
 import React, {Component} from 'react';
-import {Router} from 'react-router';
+import {Router,Link} from 'react-router';
 
 export default class Main extends Component {
   constructor(props){
@@ -9,9 +9,9 @@ export default class Main extends Component {
 
   }
   render(){
-
-    return (
-      <div>lol</div>
-    );
+      return (
+        <div><Link to="/Test">link to test</Link>
+        {this.props.children}</div>
+      );
+    }
   }
-}

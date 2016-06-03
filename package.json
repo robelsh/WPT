@@ -26,7 +26,6 @@
     "intl-locales-supported": "^1.0.0",
     "react": "*",
     "react-dom": "*",
-    "react-event-calendar": "^0.2.7",
     "react-motion": "*",
     "react-router": "*",
     "react-swipeable-views": "*",

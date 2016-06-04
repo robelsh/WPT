@@ -11,8 +11,8 @@ export default class Main extends Component {
 
     return (
       <div className="container">
-        <Link to="/Ask">POSER QUESTION</Link>
-        <Link to="/">HOME/Link>
+        <Link to="/Ask">link to ask</Link> <br/>
+        <Link to="/">link to home</Link>
         {this.props.children}
       </div>
     );

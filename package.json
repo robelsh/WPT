@@ -35,7 +35,8 @@
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.2.0"
+    "webpack-hot-middleware": "^2.2.0",
+    "react-bootstrap":"*"
   },
   "scripts": {
     "start": "node server",

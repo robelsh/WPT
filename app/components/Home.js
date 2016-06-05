@@ -48,7 +48,6 @@ export default class Home extends Component{
     this.setState({
       nbrVotes:nbrVotes
     });
-    console.log(nbrVotes);
   }
 
   handleVote(e,index){

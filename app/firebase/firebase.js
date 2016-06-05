@@ -20,8 +20,6 @@ export let firebaseUtils = {
     Firebase.database().ref("Vote/"+question).set({"question":question,"vote":vote});
   },
   newVote : function(question, index, nbrVotes){
-    console.log(nbrVotes);
-    console.log(nbrVotes[index]);
     nbrVotes[index] += 1;
     Firebase.database().ref("Vote/"+question+"/vote").set(nbrVotes);
   }

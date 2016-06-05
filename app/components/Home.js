@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Question from "./question";
+import Question from "./Question";
 import {firebaseUtils} from '../firebase/firebase'
 import Firebase from 'firebase';
 

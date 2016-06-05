@@ -11,6 +11,6 @@ Firebase.initializeApp(config);
 
 export let firebaseUtils = {
   newQuestion : function(question, answers) {
-    Firebase.database().ref("Questions/"+question).set({answers});
+    Firebase.database().ref("Questions/"+question).set({"question":question,"answers":answers});
   }
 }

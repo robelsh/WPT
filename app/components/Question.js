@@ -9,7 +9,9 @@ export default class Question extends Component{
         <Col xs={12} md={12} xs={12}>{this.props.msg}</Col>
         <Col xs={12} md={12} xs={12}>
           <ButtonToolbar>
-            <Button>ok</Button>
+            {this.props.answers.map((answers, index) =>
+              <Button>{answers}</Button>
+            )}
           </ButtonToolbar>
         </Col>
       </Row>

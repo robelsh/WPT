@@ -13,6 +13,7 @@
   ],
   "author": "Etienne Jezequel",
   "dependencies": {
+    "material-ui" :"*",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
     "babel-preset-es2015": "^6.5.0",

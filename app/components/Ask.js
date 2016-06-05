@@ -4,6 +4,7 @@ import {List, ListItem} from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Subheader from 'material-ui/Subheader';
 
@@ -121,12 +122,12 @@ export default class Ask extends Component{
           onRequestClose={this.handleRequestClose}
           />
         <form>
-          <TextField type="text" value={this.state.question} onChange={this.handleChangeQuestion}  hintText="Pose ta question" /> <br/>
-          <TextField hintText="Réponse" type="text" value={this.state.currentAnswer} onChange={this.handleChangeAnswer} errorText={this.state.error}/><br/>
-          <FlatButton onTouchTap={this.addAnswer}>Add</FlatButton>
+          <TextField type="text" value={this.state.question} onChange={this.handleChangeQuestion}  floatingLabelText="Pose ta question" /> <br/>
+          <TextField floatingLabelText="Réponse" type="text" value={this.state.currentAnswer} onChange={this.handleChangeAnswer} errorText={this.state.error}/><br/>
+          <RaisedButton onTouchTap={this.addAnswer}>Add</RaisedButton>
           <AnswersList answers={this.state.answers.map((item)=>item)} delete={this.deleteAnswer}/><br/>
-          <Divider/>
-          <FlatButton onTouchTap={this.addQuestion}>Soumez la question</FlatButton>
+          <Divider/><br/>
+          <RaisedButton onTouchTap={this.addQuestion}>Soumez la question</RaisedButton>
         </form>
       </Paper>
     );

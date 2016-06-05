@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import Question from "./question";
-import {Grid} from 'react-bootstrap';
 import {firebaseUtils} from '../firebase/firebase'
 import Firebase from 'firebase';
 
@@ -10,12 +9,31 @@ export default class Home extends Component{
     this.state = {
       questions:[],
       answers:[],
-      nbrVotes:[]
+      nbrVotes:[],
+      data:[]
     };
     this.interval = null;
     this.loadQuestionsFromFirebase = this.loadQuestionsFromFirebase.bind(this);
     this.loadVotesFromFirebase = this.loadVotesFromFirebase.bind(this);
     this.handleVote = this.handleVote.bind(this);
+  }
+
+  generateData(e){
+    let data = [];
+    this.state.questions.map((question)=>{
+      let currentData = [];
+      let index = this.state.questions.indexOf(question);
+      let votes = this.state.nbrVotes[index];
+      this.state.answers[index].map((item,i)=>{
+        var current = votes[i];
+        currentData.push({"y":votes[i],"indexLabel":item});
+      });
+      data.push(currentData);
+    });
+    this.setState({
+      data:data
+    });
+    console.log(data);
   }
 
   loadQuestionsFromFirebase(){
@@ -42,7 +60,7 @@ export default class Home extends Component{
     var nbrVotes = [];
     this.state.questions.map((question,index)=>{
       firebase.database().ref('Vote/'+question+"/vote").on('value', (dataSnapshot) => {
-        nbrVotes = dataSnapshot.val();
+        nbrVotes.push(dataSnapshot.val());
       });
     });
     this.setState({
@@ -51,14 +69,15 @@ export default class Home extends Component{
   }
 
   handleVote(e,index){
-    firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes);
+    firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes,index);
   }
 
   componentDidMount(){
     this.interval=setInterval(()=>{
       this.loadQuestionsFromFirebase();
       this.loadVotesFromFirebase();
-    },1000);
+      this.generateData()
+    },500);
   }
 
   componentWillUnmount(){
@@ -68,11 +87,9 @@ export default class Home extends Component{
   render() {
     return(
       <div>
-        <Grid>
-          {this.state.questions.map((question, index) =>
-            <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index}/>
-          )}
-        </Grid>
+        {this.state.questions.map((question, index) =>
+          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} data={this.state.data[index]}/>
+        )}
       </div>
     );
   }

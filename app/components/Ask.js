@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import Subheader from 'material-ui/Subheader';
+import {firebaseUtils} from '../firebase/firebase';
 
 export class AnswersList extends Component {
   render() {
@@ -65,7 +66,7 @@ export default class Ask extends Component{
         message:"Entrez des putain de réponses"
       });
     }else{
-      console.log("ok");
+      firebaseUtils.newQuestion(this.state.question,this.state.answers);
     }
   }
 
@@ -75,6 +76,7 @@ export default class Ask extends Component{
       var answers = this.state.answers;
       answers.push(this.state.currentAnswer);
       this.setState({
+        currentAnswer:"",
         answers:answers
       });
     }else{
@@ -114,7 +116,7 @@ export default class Ask extends Component{
 
   render() {
     return(
-      <Paper style={{padding:"34px"}} zDepth={1}>
+      <Paper style={{padding:"50px"}} zDepth={1}>
         <Snackbar
           open={this.state.open}
           message={this.state.message}

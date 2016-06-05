@@ -18,13 +18,13 @@ export default class Main extends Component {
 
     return (
       <div>
-        <AppBar
-          title={<span>WPT</span>}
-        >
-        <Link style={{paddingLeft:"4px",paddingRight:"4px",marginTop:"13px"}} to="/"><FlatButton label="Home" /></Link>
-        <Link style={{paddingLeft:"4px",paddingRight:"4px",marginTop:"13px"}} to="/Ask"><FlatButton label="Ask"/></Link>
+        <AppBar title={<span>WPT</span>}>
+          <Link style={{paddingLeft:"4px",paddingRight:"4px",marginTop:"13px"}} to="/"><FlatButton label="Home" /></Link>
+          <Link style={{paddingLeft:"4px",paddingRight:"4px",marginTop:"13px"}} to="/Ask"><FlatButton label="Ask"/></Link>
         </AppBar>
-        {this.props.children}
+        <div style={{paddingTop:"40px",paddingLeft:"120px",paddingRight:"120px"}}>
+          {this.props.children}
+        </div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ export default class Question extends Component{
         <Col xs={12} md={12} xs={12}>
           <ButtonToolbar>
             {this.props.answers.map((answers, index) =>
-              <Button>{answers}</Button>
+              <Button onTouchTap={(e)=>this.props.vote(index,this.props.index)}>{answers}</Button>
             )}
           </ButtonToolbar>
         </Col>

@@ -88,7 +88,6 @@ export default class Ask extends Component{
 
   deleteAnswer(e){
     var answerIndex = e;
-    console.log(answerIndex);
     this.setState(state =>{
       state.answers.splice(answerIndex, 1);
       return {answers: state.answers};

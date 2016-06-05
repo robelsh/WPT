@@ -1,15 +1,17 @@
 import React, {Component} from "react";
-import {FormGroup,FormControl,ControlLabel,Button,ListGroup,ListGroupItem} from "react-bootstrap";
+import {Button} from "react-bootstrap";
+import Paper from 'material-ui/Paper';
+import {List, ListItem} from 'material-ui/List';
+import TextField from 'material-ui/TextField';
 
 export class AnswersList extends Component {
   render() {
-
     return(
       <div>
         {this.props.answers.map((item, index) =>
-          <ListGroup>
-            <ListGroupItem>{item} <Button>X</Button></ListGroupItem>
-          </ListGroup>
+          <List>
+            <ListItem>{item} <Button onTouchTap={this.props.delete} value={index}>X</Button></ListItem>
+          </List>
         )}
       </div>
     );
@@ -21,40 +23,56 @@ export default class Ask extends Component{
     super(props, context);
     this.state = {
       answers:[],
-      currentAnswer:""
+      currentAnswer:"",
+      error:""
     }
     this.handleChange = this.handleChange.bind(this);
-    this.AddAnswer = this.AddAnswer.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
+    this.deleteAnswer = this.deleteAnswer.bind(this);
   }
 
-  AddAnswer(){
-    var answers = this.state.answers;
-    answers.push(this.state.currentAnswer);
-    this.setState({
-      answers:answers
+  addAnswer(e){
+    e.preventDefault();
+    if(this.state.currentAnswer != ""){
+      var answers = this.state.answers;
+      answers.push(this.state.currentAnswer);
+      this.setState({
+        answers:answers
+      });
+    }else{
+      this.setState({
+        error:"Entrez une réponse"
+      });
+    }
+  }
+
+  deleteAnswer(e){
+    var answerIndex = parseInt(e.target.value, 10);
+    console.log(answerIndex);
+    this.setState(state =>{
+      state.answers.splice(answerIndex, 1);
+      return {answers: state.answers};
     });
   }
 
   handleChange(e){
     this.setState({
-      currentAnswer:e.target.value
+      currentAnswer:e.target.value,
+      error:""
     });
   }
 
   render() {
     return(
-      <div>
-
-        <AnswersList answers={this.state.answers.map((item)=>item)}/>
+      <Paper style={{padding:"34px"}} zDepth={1}>
         <form>
-          <FormGroup controlId="formControlsText">
-            <ControlLabel>Question</ControlLabel>
-            <FormControl type="text" placeholder="Pose ta question" />
-            <ControlLabel>Reponses</ControlLabel>
-            <FormControl type="text" placeholder="Reponse" onChange={this.handleChange}/> <Button onTouchTap={this.AddAnswer}>Add</Button>
-          </FormGroup>
+          <TextField type="text" hintText="Pose ta question" />
+          <TextField hintText="Réponse" type="text" value={this.state.currentAnswer} onChange={this.handleChange} errorText={this.state.error}
+/>
+          <Button onTouchTap={this.addAnswer}>Add</Button>
+          <AnswersList answers={this.state.answers.map((item)=>item)} delete={this.deleteAnswer}/>
         </form>
-      </div>
+      </Paper>
     );
   }
 }

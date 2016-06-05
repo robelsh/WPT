@@ -4,7 +4,6 @@ import {Col,Row,ButtonToolbar,Button} from "react-bootstrap";
 export default class Question extends Component{
 
   render() {
-    console.log(this.props.answers);
     return(
       <Row className="show-grid">
         <Col xs={12} md={12} xs={12}>{this.props.msg}</Col>

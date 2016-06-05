@@ -33,17 +33,11 @@ export default class Home extends Component{
     this.setState({
       data:data
     });
-    console.log(data);
   }
 
   loadQuestionsFromFirebase(){
     let questions = [];
     let answers = [];
-    firebase.database().ref('Questions/question').on('value', (dataSnapshot) => {
-      dataSnapshot.forEach((snapshot) => {
-        console.log(snapshot.val());
-      });
-    });
     firebase.database().ref('Questions').on('value', (dataSnapshot) => {
       dataSnapshot.forEach((snapshot) => {
         questions.push(snapshot.val().question);

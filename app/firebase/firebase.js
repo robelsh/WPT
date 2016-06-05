@@ -14,17 +14,15 @@ export let firebaseUtils = {
     var vote = [];
     vote.length = answers.length;
     for (var i = 0; i < vote.length; i++) {
-      vote[i]=0;
+      vote[i]=1;
     }
     Firebase.database().ref("Questions/"+question).set({"question":question,"answers":answers});
     Firebase.database().ref("Vote/"+question).set({"question":question,"vote":vote});
   },
-  newVote : function(question, index){
-    var nbrVotes = [];
-    firebase.database().ref('Vote/'+question+"/vote").on('value', (dataSnapshot) => {
-      nbrVotes = dataSnapshot.val();
-    });
-    nbrVotes[index] = nbrVotes[index] + 1;
+  newVote : function(question, index, nbrVotes){
+    console.log(nbrVotes);
+    console.log(nbrVotes[index]);
+    nbrVotes[index] += 1;
     Firebase.database().ref("Vote/"+question+"/vote").set(nbrVotes);
   }
 }

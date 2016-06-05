@@ -9,10 +9,12 @@ export default class Home extends Component{
     super(props);
     this.state = {
       questions:[],
-      answers:[]
+      answers:[],
+      nbrVotes:[]
     };
     this.interval = null;
     this.loadQuestionsFromFirebase = this.loadQuestionsFromFirebase.bind(this);
+    this.loadVotesFromFirebase = this.loadVotesFromFirebase.bind(this);
     this.handleVote = this.handleVote.bind(this);
   }
 
@@ -36,13 +38,27 @@ export default class Home extends Component{
     });
   }
 
+  loadVotesFromFirebase(){
+    var nbrVotes = [];
+    this.state.questions.map((question,index)=>{
+      firebase.database().ref('Vote/'+question+"/vote").on('value', (dataSnapshot) => {
+        nbrVotes = dataSnapshot.val();
+      });
+    });
+    this.setState({
+      nbrVotes:nbrVotes
+    });
+    console.log(nbrVotes);
+  }
+
   handleVote(e,index){
-    firebaseUtils.newVote(this.state.questions[index],e);
+    firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes);
   }
 
   componentDidMount(){
     this.interval=setInterval(()=>{
-      this.loadQuestionsFromFirebase()
+      this.loadQuestionsFromFirebase();
+      this.loadVotesFromFirebase();
     },1000);
   }
 

@@ -10,7 +10,8 @@ export default class Home extends Component{
       questions:[],
       answers:[],
       nbrVotes:[],
-      data:[]
+      data:[],
+      totalVote:[]
     };
     this.interval = null;
     this.loadQuestionsFromFirebase = this.loadQuestionsFromFirebase.bind(this);
@@ -20,18 +21,23 @@ export default class Home extends Component{
 
   generateData(e){
     let data = [];
+    let sum = [];
     this.state.questions.map((question)=>{
       let currentData = [];
+      let currentSum = 0;
       let index = this.state.questions.indexOf(question);
       let votes = this.state.nbrVotes[index];
       this.state.answers[index].map((item,i)=>{
         var current = votes[i];
-        currentData.push({"y":votes[i],"indexLabel":item});
+        currentSum+=votes[i];
+        currentData.push({item:item,vote:votes[i]});
       });
       data.push(currentData);
+      sum.push(currentSum);
     });
     this.setState({
-      data:data
+      data:data,
+      totalVote:sum
     });
   }
 
@@ -82,7 +88,7 @@ export default class Home extends Component{
     return(
       <div>
         {this.state.questions.map((question, index) =>
-          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} data={this.state.data[index]}/>
+          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} data={this.state.data[index]} total={this.state.totalVote[index]}/>
         )}
       </div>
     );

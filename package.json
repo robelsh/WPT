@@ -38,8 +38,7 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.2.0",
     "react-bootstrap":"*",
-    "react-chartjs":"*",
-    "chart.js":"*"
+    "react-highcharts":"*"
   },
   "scripts": {
     "start": "node server",

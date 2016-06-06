@@ -11,7 +11,8 @@ export default class Home extends Component{
       answers:[],
       nbrVotes:[],
       data:[],
-      totalVote:[]
+      totalVote:[],
+      dataPie:[]
     };
     this.interval = null;
     this.loadQuestionsFromFirebase = this.loadQuestionsFromFirebase.bind(this);
@@ -21,21 +22,26 @@ export default class Home extends Component{
 
   generateData(e){
     let data = [];
+    let dataPie = [];
     let sum = [];
     this.state.questions.map((question)=>{
       let currentData = [];
+      let currentDataPie = [];
       let currentSum = 0;
       let index = this.state.questions.indexOf(question);
       let votes = this.state.nbrVotes[index];
       this.state.answers[index].map((item,i)=>{
         var current = votes[i];
         currentSum+=votes[i];
+        currentDataPie.push({name:item,y:votes[i]});
         currentData.push({item:item,vote:votes[i]});
       });
+      dataPie.push(currentDataPie);
       data.push(currentData);
       sum.push(currentSum);
     });
     this.setState({
+      dataPie:dataPie,
       data:data,
       totalVote:sum
     });
@@ -88,7 +94,7 @@ export default class Home extends Component{
     return(
       <div>
         {this.state.questions.map((question, index) =>
-          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} data={this.state.data[index]} total={this.state.totalVote[index]}/>
+          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} dataPie={this.state.dataPie[index]} data={this.state.data[index]} total={this.state.totalVote[index]}/>
         )}
       </div>
     );

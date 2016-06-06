@@ -48,8 +48,8 @@ export default class Question extends Component{
       },
       plotOptions: {
         pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
+          allowPointSelect: false,
+          cursor: '',
           dataLabels: {
             enabled: true,
             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
@@ -75,9 +75,9 @@ export default class Question extends Component{
           >
           <ReactHighcharts config = {config}></ReactHighcharts>
         </Dialog>
-        <Paper zDepth={1} style={{padding:"24px",marginTop:"24px",marginBottom:"24px"}}>
+        <Paper>
           {!this.props.data ? <div ><CircularProgress size={2} /></div> :
-          <Grid style={{marginRight:"24px",marginLeft:"24px"}}>
+          <Grid>
             <Col xs={8} md={8}>
               <h2>{this.props.msg}</h2>
               {this.props.answers.map((answers, index) =>

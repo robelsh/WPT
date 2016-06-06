@@ -14,7 +14,9 @@ export default class Question extends Component{
     this.state = {
       open:false,
       data:[],
-      options:[]
+      options:[],
+      voted:false,
+      ips:[]
     }
     this.displayChart = this.displayChart.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -29,6 +31,25 @@ export default class Question extends Component{
     this.setState({
       open:false
     });
+  }
+
+  loadIpsFromFirebase(){
+    let ips = [];
+    var ipInfos = JSON.parse(document.getElementById("ip").innerHTML);
+
+    firebase.database().ref('Vote/'+this.props.msg+"/infos").on('value', (dataSnapshot) => {
+      dataSnapshot.forEach((snapshot) => {
+        ips.push(snapshot.val().query);
+      });
+      this.setState({
+        currentIp:ipInfos.query,
+        ips:ips
+      });
+    });
+  }
+
+  componentDidMount(){
+    this.loadIpsFromFirebase();
   }
 
   render() {
@@ -65,6 +86,10 @@ export default class Question extends Component{
         data: this.props.dataPie
       }]
     };
+    var voted = false;
+    if(this.state.ips.indexOf(this.state.currentIp)>-1){
+      voted=true;
+    }
     return(
       <div>
         <Dialog
@@ -81,7 +106,7 @@ export default class Question extends Component{
             <Col xs={8} md={8}>
               <h2>{this.props.msg}</h2>
               {this.props.answers.map((answers, index) =>
-                <RaisedButton primary={true} onTouchTap={(e)=>this.props.vote(index,this.props.index)}>{answers}</RaisedButton>
+                <RaisedButton disabled={voted} primary={true} onTouchTap={(e)=>this.props.vote(index,this.props.index)}>{answers}</RaisedButton>
               )}
               <br/><br/>
               <ProgressBar width="100px">

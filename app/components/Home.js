@@ -75,7 +75,8 @@ export default class Home extends Component{
   }
 
   handleVote(e,index){
-    firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes,index);
+    var ipInfos = JSON.parse(document.getElementById("ip").innerHTML);
+    firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes,index,ipInfos);
   }
 
   componentDidMount(){
@@ -93,9 +94,9 @@ export default class Home extends Component{
   render() {
     return(
       <div>
-        {this.state.questions.map((question, index) =>
-          <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} dataPie={this.state.dataPie[index]} data={this.state.data[index]} total={this.state.totalVote[index]}/>
-        )}
+      {this.state.questions.map((question, index) =>
+        <Question msg={question} answers={this.state.answers[index]} vote={this.handleVote} index={index} dataPie={this.state.dataPie[index]} data={this.state.data[index]} total={this.state.totalVote[index]}/>
+      )}
       </div>
     );
   }

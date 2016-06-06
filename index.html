@@ -10,13 +10,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
-  <style>
-  a.canvasjs-chart-credit{
-    display: none;
-  }
-  </style>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
   <div id="app"></div>
+  <div id="ip" style="display:none"></div>
 </body>
+<script>
+$.getJSON('//ip-api.com/json?callback=?', function(data) {
+  $("#ip").html((JSON.stringify(data, null, 2)));
+});
+</script>
 </html>

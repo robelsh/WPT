@@ -35,7 +35,7 @@ export default class Question extends Component{
 
   loadIpsFromFirebase(){
     let ips = [];
-    var ipInfos = JSON.parse(document.getElementById("ip").innerHTML);
+    var ipInfos = JSON.parse(window.atob(document.getElementById("ip").innerHTML));
 
     firebase.database().ref('Vote/'+this.props.msg+"/infos").on('value', (dataSnapshot) => {
       dataSnapshot.forEach((snapshot) => {

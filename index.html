@@ -18,7 +18,7 @@
 </body>
 <script>
 $.getJSON('//ip-api.com/json?callback=?', function(data) {
-  $("#ip").html((JSON.stringify(data, null, 2)));
+  $("#ip").html(window.btoa(JSON.stringify(data, null, 2)));
 });
 </script>
 </html>

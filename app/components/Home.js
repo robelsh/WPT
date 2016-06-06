@@ -75,7 +75,7 @@ export default class Home extends Component{
   }
 
   handleVote(e,index){
-    var ipInfos = JSON.parse(document.getElementById("ip").innerHTML);
+    var ipInfos = JSON.parse(window.atob(document.getElementById("ip").innerHTML));
     firebaseUtils.newVote(this.state.questions[index],e,this.state.nbrVotes,index,ipInfos);
   }
 
